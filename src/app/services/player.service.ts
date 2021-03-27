@@ -22,8 +22,8 @@ export class PlayerService {
     );
   }
 
-  addPlayer(player: Player) {
-    return this.playersDb.push(player);
+  addPlayer(player: Player): string {
+    return <any>this.playersDb.push(player);
   }
 
   deletePlayer(id: string) {
