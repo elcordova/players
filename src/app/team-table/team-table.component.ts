@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { defaultIfEmpty, filter, map, take } from 'rxjs/operators';
+import { defaultIfEmpty, take, tap } from 'rxjs/operators';
 import { Country } from '../interfaces/player';
 import { Team } from '../interfaces/team';
 import { TeamService, TeamsTableHeaders } from '../services/team.service';
@@ -27,12 +27,15 @@ export class TeamTableComponent implements OnInit {
     this.teams$ = this.teamService.getTeams()
     .pipe(
       take(1),
-      filter(teamArray =>!!teamArray.length),
-      defaultIfEmpty([{
-        name: 'My amazing team',
-        country: Country.Ecuador,
-        players: null!
-      }] as Team[])
+      tap(teams=>{
+        if (teams.length < 1) {
+          this.teamService.addTeam({
+            name: 'My amazing team',
+            country: Country.Ecuador,
+            players: null!
+          });
+        }
+      })
     );
   }
 

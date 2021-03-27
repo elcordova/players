@@ -23,7 +23,7 @@ export class PlayerService {
   }
 
   addPlayer(player: Player): string {
-    return <any>this.playersDb.push(player);
+    return <any>this.playersDb.push(player).key;
   }
 
   deletePlayer(id: string) {

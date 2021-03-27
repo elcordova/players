@@ -11,7 +11,6 @@ export const TeamsTableHeaders = ['name', 'country', 'players'];
 })
 export class TeamService {
   private teamsDb: AngularFireList<Team>;
-
   constructor(private db: AngularFireDatabase) {
     this.teamsDb = this.db.list('/teams', ref => ref.orderByChild('name'));
   }

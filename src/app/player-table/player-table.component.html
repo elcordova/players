@@ -4,7 +4,7 @@
     <div class="container">
       <div class="interior"><a (click)="newPlayer()" class="btn">New Player</a></div>
     </div>
-    <table cellpadding="0" colspadding="0", border="0">
+    <table cellpadding="0" colspadding="0" border="0">
       <thead>
         <tr>
           <th>Name</th>
@@ -18,10 +18,10 @@
       </thead>
     </table>
   </div>
-  <di class="tbl-contetn-player">
-    <table cellpadding="0" colspadding="0", border="0">
+  <div class="tbl-contetn-player">
+    <table cellpadding="0" colspadding="0" border="0">
       <tbody>
-        <tr *ngFor="let player of (players|async)">
+        <tr *ngFor="let player of (players$|async)">
           <th>{{player.name}}</th>
           <th>{{player.lastName}}</th>
           <th>{{player.position}}</th>
@@ -36,5 +36,6 @@
           </tr>
       </tbody>
     </table>
-  </di>
+  </div>
 </section>
+<app-player-dialog></app-player-dialog>

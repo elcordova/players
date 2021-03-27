@@ -11,7 +11,7 @@ import { PlayerService } from '../services/player.service';
 export class PlayerTableComponent implements OnInit {
   players$!: Observable<Player[]>;
   public selectedPlayer!: Player;
-  public showModal: boolean;
+  public showModal!: boolean;
   constructor(private playerService: PlayerService) { }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class PlayerTableComponent implements OnInit {
     this.showModal = true;
     this.selectedPlayer = null!;
     setTimeout(() => {
-      window.location.replace('#open');
+      window.location.replace('#open-modal');
     });
   }
 
