@@ -17,7 +17,7 @@ export class PlayerService {
     return this.playersDb.snapshotChanges()
     .pipe(
       map(changes => {
-        return changes.map(c => ({$key: c.payload.key, ...c.payload.val()} as Player))
+        return changes.map(c => ({key: c.payload.key, ...c.payload.val()} as Player))
       })
     );
   }
@@ -31,9 +31,10 @@ export class PlayerService {
   }
 
   editPlayer(newPlayer: Player) {
-    const $key = newPlayer.$key as string;
-    delete(newPlayer.$key);
-    this.db.list<Player>('/players').update($key, newPlayer);
+    const contextPlayer = {... newPlayer};
+    const $key = contextPlayer.key as string;
+    delete(contextPlayer.key);
+    this.db.list<Player>('/players').update($key, contextPlayer);
   }
 
 }
