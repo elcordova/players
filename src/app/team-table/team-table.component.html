@@ -1,10 +1,14 @@
 <section>
   <h1>My Team</h1>
+  <div class="container">
+    <div class="interior"><a (click)="newTeam()" class="btn">New Team</a></div>
+  </div>
   <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
         <tr>
           <th *ngFor="let item of headers">{{item}}</th>
+          <th>Actions</th>
         </tr>
       </thead>
     </table>
@@ -12,16 +16,22 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor="let team of (teams$ | async)">
+        <tr *ngFor="let team of (teams$ | async)" (click)="onSelectTeam(team)">
           <th>{{team.name}}</th>
           <th>{{team.country}}</th>
           <th>
-            <p *ngFor="let player of team.players">
-              {{player.name}}
-            </p>
+              {{team.players?.length||0}}
+          </th>
+          <th>
+            <button (click)="editTeam(team); $event.stopPropagation()">Edit</button>
+            <button (click)="deleteTeam(team.$key); $event.stopPropagation()">Delete</button>
           </th>
         </tr>
       </tbody>
     </table>
   </div>
 </section>
+
+<app-team-dialog *ngIf="showModal" [team]="defaultValuesTeam" (closeDialog)="closeDialog()"></app-team-dialog>
+
+<app-player-table *ngIf="selectedTeam" [selectedTeam]="selectedTeam" ></app-player-table>

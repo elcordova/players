@@ -10,12 +10,14 @@ import { TeamTableComponent } from './team-table/team-table.component';
 import { PlayerTableComponent } from './player-table/player-table.component';
 import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { TeamDialogComponent } from './team-dialog/team-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     TeamTableComponent,
     PlayerTableComponent,
-    PlayerDialogComponent
+    PlayerDialogComponent,
+    TeamDialogComponent
   ],
   imports: [
     BrowserModule,

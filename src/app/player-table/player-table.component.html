@@ -1,5 +1,5 @@
 <section>
-  <h1>Players</h1>
+  <h1>Players of {{selectedTeam?.name}}</h1>
   <div class="tbl-headers">
     <div class="container">
       <div class="interior"><a (click)="newPlayer()" class="btn">New Player</a></div>
@@ -8,6 +8,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Last name</th>
           <th>Position</th>
           <th>Weight</th>
           <th>Height</th>
@@ -21,7 +22,7 @@
   <div class="tbl-contetn-player">
     <table cellpadding="0" colspadding="0" border="0">
       <tbody>
-        <tr *ngFor="let player of (players$|async)">
+        <tr *ngFor="let player of selectedTeam.players">
           <th>{{player.name}}</th>
           <th>{{player.lastName}}</th>
           <th>{{player.position}}</th>

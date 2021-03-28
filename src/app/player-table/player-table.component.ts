@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Player } from '../interfaces/player';
+import { Team } from '../interfaces/team';
 import { PlayerService } from '../services/player.service';
 import { TeamService } from '../services/team.service';
 
@@ -10,15 +11,11 @@ import { TeamService } from '../services/team.service';
   templateUrl: './player-table.component.html',
   styleUrls: ['./player-table.component.scss']
 })
-export class PlayerTableComponent implements OnInit {
-  players$!: Observable<Player[]>;
+export class PlayerTableComponent {
+  @Input() selectedTeam!: Team;
   public selectedPlayer!: Player;
   public showModal!: boolean;
   constructor(private playerService: PlayerService, private teamService: TeamService) { }
-
-  ngOnInit(): void {
-    this.players$ = this.playerService.getPlayers();
-  }
 
   newPlayer() {
     this.showModal = true;
@@ -41,17 +38,13 @@ export class PlayerTableComponent implements OnInit {
   }
   
   deletePlayer(key: any) {
-    this.teamService.getTeams().pipe(
-      take(1),
-    ).subscribe(teams => {
-      const modiffiedPlayers = teams[0].players.filter(player=>player.key!==key);
+      const modiffiedPlayers = this.selectedTeam.players.filter(player=>player.key!==key);
       const moddifyTeam = {
-        ...teams[0],
+        ...this.selectedTeam,
         players: [...modiffiedPlayers]
       }
       this.playerService.deletePlayer(key);
       this.teamService.editTeam(moddifyTeam)
-    });
   }
 
   getDefaullValuesForNewPlayer(): Player {
