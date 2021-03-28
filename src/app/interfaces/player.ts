@@ -1,5 +1,5 @@
 export interface Player {
-  $key?: string,
+  key?: string,
   name: string,
   lastName: string,
   position: string,
