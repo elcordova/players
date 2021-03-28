@@ -21,15 +21,6 @@ export class TeamTableComponent implements OnInit {
   ngOnInit(): void {
     this.teams$ = this.teamService.getTeams()
     .pipe(
-      tap(teams=>{
-        if (teams.length < 1) {
-          this.teamService.addTeam({
-            name: 'My amazing team',
-            country: Country.Ecuador,
-            players: null!
-          });
-        }
-      }),
       tap(teams => {
         if (this.selectedTeam) {
           const team = <any>teams.find(team=>team.$key == this.selectedTeam.$key)
