@@ -26,7 +26,6 @@ export class TeamTableComponent implements OnInit {
 
     this.teams$ = this.teamService.getTeams()
     .pipe(
-      take(1),
       tap(teams=>{
         if (teams.length < 1) {
           this.teamService.addTeam({
